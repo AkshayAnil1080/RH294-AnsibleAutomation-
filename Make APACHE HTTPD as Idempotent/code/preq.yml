@@ -1,0 +1,51 @@
+- hosts: all
+  vars_files:
+          - var.yml
+
+  tasks:
+  - name: "install httpd rpm"
+    package:
+            name: "httpd"
+            state: present
+
+
+  - file:
+          state: directory
+          path: "{{ doc_root }}"
+
+
+  - name: "changing the config file as /etc/httpd/condf.d"        
+    template:
+          dest: "/etc/httpd/conf.d/codeDR.conf"
+          src: "codeDR.conf"
+
+    notify:
+    - restart httpd
+
+  - name: "copying the html file in new document root"
+    copy:
+          dest: "{{ doc_root }}/brow.html"
+          content : "testing ansible handler"
+
+  
+  - name: " starting the sevice"
+    service:
+          name: "httpd"
+          state: started
+          enabled: yes
+          
+  - firewalld:
+          port: "{{ http_port }}/tcp"
+          state: enabled
+          permanent: yes
+          immediate: yes
+
+
+ 
+  handlers:
+  - name: restart httpd
+    service:
+            name: "httpd"
+            state: restarted
+
+
