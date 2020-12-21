@@ -1,4 +1,4 @@
-# HTTPD SERVIE AS IDEMPOTET
+# HTTPD SERVICE AS IDEMPOTENT
 
 PROBLEM STATEMENT:
 The httpd service is not idempotent in nature, ie it always restarts the service if some changes been made in conf file or not.
