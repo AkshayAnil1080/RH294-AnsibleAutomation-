@@ -202,52 +202,7 @@ With the use of notify and handler module, we made the httpd service restarts on
 
 👉 How to configure yum, create directory, mount, install packages and enable firewalld service using ansible?
 
- ✔25. -hosts: all
-
-//create directory
- -file:
-   state: directory
-   path: "dvd1"
-
-//mount
- -mount:
-   src: “/dev/cdrom"
-   path: "/dvd1"
-   state: mounted
-   fstype: "iso9660"
-
-//configure yum
- -yum_repository:
-   baseurl: "/dvd1/AppStream"
-   name: "dvd1"
-   description: "dvd1 for package"
-   gpgcheck: no
-
- -yum_repositorty:
-   baseurl: "dvd1/BaseOS"
-   name: "dvd2"
-   description: "dvd2 for package"
-   gpgcheck: no
- 
-//conf. web server
- -package:
-   name: httpd
-   state: present
-
- -copy:
-   dest: "/var/www/html/filename.html"
-   content: "this is my website"
-
- -service:
-   name: "httpd"
-   state: started
-   enabled: yes
-
- -firewalld:
-   port: 80/udp
-   state: enabled
-   permanent: yes
-   immediate: yes
+ ✔25. see the code folder.
 
 
 👉 What is the use of firewall-cmd --list-port?
